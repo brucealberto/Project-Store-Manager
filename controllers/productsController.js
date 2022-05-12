@@ -20,7 +20,19 @@ const listProductsById = async (req, res, _next) => {
   }
 };
 
+const insertProducts = async (req, res, _next) => {
+  try {
+    const { name, quantity } = req.body;
+    const insertedProduct = await productsService.insertProducts(name, quantity);
+    return res.status(201).json(insertedProduct);
+  } catch (error) {
+  console.log('productsController.js ~ insertProducts', error);
+    return res.status(409).json({ message: error.message });
+  }
+};
+
 module.exports = {
   listAllProducts,
   listProductsById,
+  insertProducts,
 };
