@@ -26,8 +26,8 @@ const insertProducts = async (req, res, _next) => {
     const insertedProduct = await productsService.insertProducts(name, quantity);
     return res.status(201).json(insertedProduct);
   } catch (error) {
-  console.log('productsController.js ~ insertProducts', error);
-    return res.status(409).json({ message: error.message });
+  console.log('productsController.js ~ insertProducts', error.message);
+    return res.status(409).json(error);
   }
 };
 

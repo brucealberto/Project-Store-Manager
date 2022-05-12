@@ -6,8 +6,8 @@ const validateProductsJoi = Joi.object({
 });
 
 const middlewareProductsJoi = (req, res, next) => {
-  const { error } = req.body;
-  validateProductsJoi.validate(error);
+  const { name, quantity } = req.body;
+  const { error } = validateProductsJoi.validate({ name, quantity });
 
   if (error) {
     const statusCode = error.message.includes('Product already exists') ? 409 : 201;
