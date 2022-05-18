@@ -21,8 +21,20 @@ const listSalesById = async (id) => {
   console.log('model ', result);
   return result;
 };
+const createSales = async () => {
+  const query = 'INSERT INTO sales (date) VALUES(now())';
+  const [result] = await connection.execute(query);
+  return result.insertId;
+};
 
+const createSalesProducts = async (saleId, productId, quantity) => {
+  const query = 'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES(?, ?, ?)';
+  const [result] = await connection.execute(query, [saleId, productId, quantity]);
+  return result;
+};
 module.exports = {
   listAllSales,
   listSalesById,
+  createSales,
+  createSalesProducts,
 };

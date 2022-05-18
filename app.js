@@ -23,9 +23,8 @@ app.post(
   middlewareProductsJoi,
   productsController.insertProducts,
 );
-app.put('/products/:id', validateJoi(validateProduct));
-
-// Sales
+app.put('/products/:id', validateJoi(validateProduct), productsController.updatedProducts);
+app.delete('/products/:id', productsController.deleteProducts);
 app.get('/sales', salesController.listAllSales);
 app.get('/sales/:id', validateSalesId, salesController.listSalesById);
 app.post('/sales', middlewareSalesJoi);

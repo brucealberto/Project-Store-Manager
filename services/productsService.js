@@ -25,8 +25,27 @@ const insertProducts = async (name, quantity) => {
   return insertedProduct;
 };
 
+const updateProducts = async (id, name, quantity) => {
+  const products = await productsModel.listProductsById(id);
+  if (products.length === 0) {
+    throw handleError(404, 'Product not found');
+  }
+  const update = await productsModel.updateProduct(name, quantity, id); // 
+  return update;
+};
+
+const deleteProducts = async (id) => {
+  const products = await productsModel.listProductsById(id);
+  if (products.length === 0) {
+    throw handleError(404, 'Product not found');
+  }
+  await productsModel.deleteProduct(id);
+};
+
 module.exports = {
   listAllProducts,
   listProductsById,
   insertProducts,
+  updateProducts,
+  deleteProducts,
 };

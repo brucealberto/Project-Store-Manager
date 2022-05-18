@@ -30,9 +30,23 @@ const findName = async (name) => {
   return findByName;
 };
 
+const updateProduct = async (name, quantity, id) => {
+  const query = 'UPDATE products SET name = ?, quantity = ? WHERE id = ?';
+  const [result] = await connection.execute(query, [name, quantity, id]);
+  return result;
+};
+
+const deleteProduct = async (id) => {
+  const query = 'DELETE FROM products WHERE id = ?';
+  const [result] = await connection.execute(query, [id]);
+  return result;
+}; 
+// pera , nao vai ser leo id? a deleção?
 module.exports = {
   listAllProducts,
   listProductsById,
   insertProducts,
   findName,
+  updateProduct,
+  deleteProduct,
 };

@@ -31,8 +31,31 @@ const insertProducts = async (req, res, _next) => {
   }
 };
 
+const updatedProducts = async (req, res, _next) => {
+  try {
+    const { id } = req.params;
+    const { name, quantity } = req.body;
+    await productsService.updateProducts(id, name, quantity);
+    return res.status(200).json({ id, name, quantity });
+  } catch (error) {
+    return res.status(404).json(error);
+  }
+};
+
+const deleteProducts = async (req, res, _next) => {
+  try {
+    const { id } = req.params;
+    await productsService.deleteProducts(id);
+    return res.status(204).end();
+  } catch (error) {
+    return res.status(404).json(error);
+  }
+};
+
 module.exports = {
   listAllProducts,
   listProductsById,
   insertProducts,
+  updatedProducts,
+  deleteProducts,
 };
