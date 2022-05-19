@@ -38,6 +38,7 @@ const updateSales = async (quantity, saleId, productId) => {
   const [result] = await connection.execute(query, [quantity, saleId, productId]);
   return result;
 };
+
 module.exports = {
   listAllSales,
   listSalesById,

@@ -35,7 +35,7 @@ const insertedSales = async (req, res, _next) => {
   }
 };
 
-const updatedProducts = async (req, res, _next) => {
+const updatedSales = async (req, res, _next) => {
   try {
     const { id } = req.params;
     const sales = req.body;
@@ -66,5 +66,5 @@ module.exports = {
  listAllSales,
  listSalesById,
  insertedSales,
- updatedProducts,
+ updatedSales,
 };
