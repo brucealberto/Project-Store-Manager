@@ -21,7 +21,50 @@ const listSalesById = async (req, res, _next) => {
   }
 };
 
+const insertedSales = async (req, res, _next) => {
+  try {
+    const sales = req.body;
+    const saleId = await salesService.createSales(sales);
+    const salesObj = {
+      id: saleId,
+      itemsSold: sales,
+    };
+    return res.status(201).json(salesObj);
+  } catch (error) {
+    return res.status(404).json(error); 
+  }
+};
+
+const updatedProducts = async (req, res, _next) => {
+  try {
+    const { id } = req.params;
+    const sales = req.body;
+    await salesService.updateSales(id, sales);
+    const salesObj = {
+      saleId: id,
+      itemUpdated: sales,
+    };
+    return res.status(200).json(salesObj);
+  } catch (error) {
+    return res.status(404).json(error);
+  }
+};
+
+/**
+ *   {
+    "saleId": 1,
+    "itemUpdated": [
+      {
+        "productId": 1,
+        "quantity": 6
+      }
+    ]
+  }
+ */
+
 module.exports = {
  listAllSales,
  listSalesById,
+ insertedSales,
+ updatedProducts,
 };

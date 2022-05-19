@@ -10,12 +10,23 @@ const listsalesById = async (id) => {
   return salesId;
 };
 
-// const createSales = async (sales) => {
-// const saleId = await salesModel.createSales()
+const createSales = async (sales) => {
+  const saleId = await salesModel.createSales();
+  await Promise.all(
+    sales.map(({ quantity, productId }) =>
+      salesModel.createSalesProducts(saleId, productId, quantity)),
+  );
+  return saleId;
+};
 
-// }
+const updateSales = async (quantity, saleId, productId) => {
+  const updatedSales = await salesModel.updateSales(quantity, saleId, productId);
+  return updatedSales;
+};
 
 module.exports = {
   listAllSales,
   listsalesById,
+  createSales,
+  updateSales,
 };

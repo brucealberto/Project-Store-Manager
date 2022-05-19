@@ -27,9 +27,15 @@ const createSales = async () => {
   return result.insertId;
 };
 
-const createSalesProducts = async (saleId, productId, quantity) => {
+const createSalesProducts = async (saleId, productId, quantity) => { 
   const query = 'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES(?, ?, ?)';
   const [result] = await connection.execute(query, [saleId, productId, quantity]);
+  return result;
+};
+
+const updateSales = async (quantity, saleId, productId) => {
+  const query = 'UPDATE sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ? ';
+  const [result] = await connection.execute(query, [quantity, saleId, productId]);
   return result;
 };
 module.exports = {
@@ -37,4 +43,5 @@ module.exports = {
   listSalesById,
   createSales,
   createSalesProducts,
+  updateSales,
 };

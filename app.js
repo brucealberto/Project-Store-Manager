@@ -27,8 +27,8 @@ app.put('/products/:id', validateJoi(validateProduct), productsController.update
 app.delete('/products/:id', productsController.deleteProducts);
 app.get('/sales', salesController.listAllSales);
 app.get('/sales/:id', validateSalesId, salesController.listSalesById);
-app.post('/sales', middlewareSalesJoi);
-app.put('/sales/:id', middlewareSalesJoi);
+app.post('/sales', middlewareSalesJoi, salesController.insertedSales);
+app.put('/sales/:id', middlewareSalesJoi, salesController.updatedProducts);
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
 // você deve usar o arquivo index.js para executar sua aplicação
