@@ -42,8 +42,8 @@ describe('Ao constar a camada Model retornar os produtos do banco', () => {
     })
 
     it('O array deve ter um objeto com as chaves "saleId", "date", "productId", "quantity" ', async () => {
-      const result = await listAllProducts()
-      expect(result).to.be.deep.equal({
+      const result = await listAllSales()
+      expect(result[0]).to.be.deep.equal({
         "saleId": 1,
         "date": "2021-09-09T04:54:29.000Z",
         "productId": 1,
